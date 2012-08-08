@@ -6,7 +6,13 @@ class Ingredient(models.Model):
     slug = models.SlugField(editable = False)
 
     def save(self, *args, **kwargs):
-        if self.slug == None:
+        if self.slug is None:
             self.slug = slugify(self.q)
         
         super(Ingredient, self).save(*args, **kwargs)
+
+
+class IngredientLine(models.Model):
+    ingredient = models.ForeignKey(Ingredient)
+    quantity = models.CharField(max_length = 50)
+    preparation = models.CharField(max_length = 50)
