@@ -6,7 +6,7 @@ class Ingredient(models.Model):
     slug = models.SlugField(editable = False)
 
     def save(self, *args, **kwargs):
-        if self.slug is None:
+        if self.slug == '':
             self.slug = slugify(self.name)
         
         super(Ingredient, self).save(*args, **kwargs)
